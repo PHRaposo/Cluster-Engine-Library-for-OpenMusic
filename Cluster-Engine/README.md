@@ -1,8 +1,11 @@
 # Cluster Engine
 
 CLUSTER ENGINE LIBRARY FOR OPENMUSIC
+
 PWGL VERSION BY ORJAN SANDRED (2010)
+
 PLAIN LISP VERSION - ORJAN SANDRED, TORSTEN ANDERS AND JULIEN VINCENOT (2020)
+
 OM VERSION - PAULO RAPOSO (2021)
 
 Cluster Engine is a constraint solver for solving polyphonic constraint satisfaction problems where both the pitch and the rhythmic structure can be restricted by an arbitrary number of constraints (rules), and the solver then searches for a solution that is consistent with all constraints. This library supports user-defined rules, and highly flexible ways to control which aspects of the resulting score are controlled by certain rules. For example, you can independently control with compositional rules the melody and harmony of the music you generate. 
