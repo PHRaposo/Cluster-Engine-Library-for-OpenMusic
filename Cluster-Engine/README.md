@@ -1,7 +1,7 @@
 # Cluster Engine
 
 CLUSTER ENGINE LIBRARY FOR OPENMUSIC
-PWGL VERSION BY ÖRJAN SANDRED (2010)
+PWGL VERSION BY ORJAN SANDRED (2010)
 PLAIN LISP VERSION - ORJAN SANDRED, TORSTEN ANDERS AND JULIEN VINCENOT (2020)
 OM VERSION - PAULO RAPOSO (2021)
 
@@ -25,7 +25,7 @@ Move the Cluster-Engine folder to the OM/Libraries/ folder (it's important to us
 
 ** References 
 
-Sandred, Ö. (2010) PWMC, a Constraint-Solving System for Generating Music Scores. /Computer Music Journal/. 34(2), 8–24.
+Sandred, O. (2010) PWMC, a Constraint-Solving System for Generating Music Scores. /Computer Music Journal/. 34(2), 8√ê24.
 
 Vincenot, J. (2017) LISP in Max: Exploratory Computer-Aided Composition in Real-Time. /ICMC 2017/. 
 
