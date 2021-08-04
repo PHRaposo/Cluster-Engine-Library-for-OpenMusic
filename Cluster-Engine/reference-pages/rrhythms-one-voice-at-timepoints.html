@@ -1,0 +1,160 @@
+<html>
+<head><title>RRHYTHMS-ONE-VOICE-AT-TIMEPOINTS - Cluster-Engine Reference Documentation</title>
+<STYLE TYPE="text/css"><!--  
+
+BODY {background-color: #EEEEEE;
+	  font-family: Verdana;
+font-size: 12;
+color : #0000000;
+}
+
+A:link {text-decoration: underline; color : 333366;}
+A:visited {text-decoration: underline; color : 333366;}
+A:active {Verdana; text-decoration: underline; color:333366;}
+A:hover {Verdana; text-decoration: underline; color: 333366;}
+
+H1 {
+ color : #333333;
+ font-size: 18;
+ font-weight: bold
+ text-align: left;
+}
+	
+H2 {
+ color : #333333;
+ font-size: 16;
+ font-weight: bold;
+}
+
+H3 {
+ color : #444444;
+ font-size: 12;
+ font-weight: bold;
+}
+
+P,UL,LI, TD {	
+ font-size: 11;
+ text-indent: 0cm;
+ text-align: justify;
+}
+.right {text-align: right ;}
+.center {text-align: center ;}
+.top {text-align: top ;}
+   --></style>
+</head>
+<body bgcolor=BBBBBB>
+<br>
+<table align=center bgcolor=FFFFFF width=87%><tr>
+<td>
+<h2>RRHYTHMS-ONE-VOICE-AT-TIMEPOINTS</h2>
+<font size=-1>[GENERIC-FUNCTION]</font><br><br>
+</td><td width=130>
+<img src=./omlogo.gif width=100><br>
+<font size=-2 align=right><a href=index.html>Cluster-Engine<br> Function Reference</a></font>
+</td></tr>
+<tr><td colspan=2>
+<font color=882222><b>ARGUMENTS:</b></font><br>
+<table width=100% border=0>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>rule</b></font>
+</td>
+<td>rule</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>voices</b></font>
+</td>
+<td>voice-number</td>
+<td>[default = 0]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>timepoints</b></font>
+</td>
+<td>list-of-timepoints</td>
+<td>[default = (0)]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>input-mode</b></font>
+</td>
+<td>input-mode</td>
+<td>[default = :motifs-start]</td>
+</tr>
+<tr>
+<tr>
+<td>
+<i><b>&optional</b></i><br>
+</td>
+<td colspan=3>&nbsp;</td></tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>rule-type</b></font>
+</td>
+<td>&nbsp;</td>
+<td>[default = :true/false]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>weight</b></font>
+</td>
+<td>&nbsp;</td>
+<td>[default = 1]</td>
+</tr>
+<tr>
+</table>
+</tr>
+<tr><td colspan=2>
+<br><font color=882222><b>Description:</b></font><p>
+Rule for rhythms that exist at timepoints in one voice.<br>
+<br>
+&lt;rule&gt; is a logic statement in he form of a function. The output of the <br>
+function has to be either true or false. .If there are more than one <br>
+input to the function, they will receive the information for consecutive<br>
+timepoints.<br>
+<br>
+&lt;voices&gt; is the number for the voice (starting at 0) that the rule affects. <br>
+It is possible to give a list of several voice numbers: The rule will then <br>
+be applied to every voice in the list (independant of each other).<br>
+<br>
+&lt;timepoints&gt; is a list of timepoints (starting from 0) counted from the <br>
+beginning of the score where the rule will be checked. For example<br>
+the timepoint 15/4 will be 15 quarter notes from the beginning of the <br>
+score. <br>
+<br>
+&lt;input-mode&gt;              <br>
+- motifs-start: The start time for motifs will be compared to the given <br>
+                timepoint. An input receives the as <br>
+                '(offset-to-timepoint (motif)). Offset is the duration <br>
+                between the startingpoint of the motif and given timepoint. <br>
+                Ex. (-1/4 (1/8 -1/8 1/16 1/16))<br>
+- motifs-end:   The end time for motifs will be compared to the given <br>
+                timepoint. An input receives the as <br>
+                '(offset-to-timepoint (motif)). Offset is the duration <br>
+                between the endingpoint of the motif and given timepoint. <br>
+                Ex. (1/8 (1/8 -1/8 1/16 1/16))<br>
+- dur-start:    The start time for durations and rests will be compared to <br>
+                the given timepoint. An input receives the as <br>
+                '(offset-to-timepoint duration). Offset is the duration <br>
+                between the startingpoint of the event and given timepoint. <br>
+                Ex. (-1/16 1/4)<br>
+<br>
+This rule always prefer to backtrack the rhythm engine that it belongs to.<br>
+</p><br><br></td></tr>
+<td class=center colspan=2>
+<center><font size=-2>Auto doc generation by OpenMusic 6.19 &copy 2021 IRCAM</font></center>
+</td></tr></table>
+</body></html>
