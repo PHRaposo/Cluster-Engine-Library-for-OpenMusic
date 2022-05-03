@@ -1,0 +1,52 @@
+
+(:patch
+ (:name "000-INTRO")
+ (:doc "")
+ (:info
+  (:created "2021/07/10 15:08:10")
+  (:modified "2021/07/10 15:11:32")
+  (:by "om-sharp")
+  (:version 1.03))
+ (:window (:size (549 581)) (:position (41 69)))
+ (:grid nil)
+ (:lock nil)
+ (:boxes
+  (:comment
+   (:x 42)
+   (:y 149)
+   (:w 419)
+   (:h 263)
+   (:fgcolor (:color 0 0 0 1.0))
+   (:bgcolor nil)
+   (:border 0)
+   (:roundness nil)
+   (:text-font (:font (:face "Verdana") (:size 12) (:style :plain)))
+   (:align nil)
+   (:text
+    "The Cluster Engine is a system for solving musical constraint satisfaction problems. The solution to a musical constraint satisfaction problem is a score that satisfies a set of constraints defined by the user/composer. The name The Cluster Engine refers to the idea of using a cluster of search engines that collaboratively solve a problem (similar to the idea of a computer cluster). 
+
+
+
+
+The Cluster Engine breaks down the musical score into several sequences of variables. Each sequence refers to the succession of elements for a specific parameter in a voice in the score, for example a sequence can refer to the pitches in one voice. A single voice is represented by two sequences: one for pitches and one for durations (including rests). One additional sequence represents the metric structure in the score.")
+   (:id 0))
+  (:comment
+   (:x 63)
+   (:y 9)
+   (:w 338)
+   (:h 128)
+   (:fgcolor (:color 0 0 0 1.0))
+   (:bgcolor nil)
+   (:border 0)
+   (:roundness nil)
+   (:text-font (:font (:face "Verdana") (:size 12) (:style :plain)))
+   (:align nil)
+   (:text
+    "THE CLUSTER ENGINE BY ORJAN SANDRED (2010)
+
+PLAIN LISP VERSION - ORJAN SANDRED, TORSTEN ANDERS AND JULIEN VINCENOT
+Available at: https://github.com/tanders/cluster-engine
+
+OM VERSION - PAULO RAPOSO (2021)")
+   (:id 1)))
+ (:connections))
