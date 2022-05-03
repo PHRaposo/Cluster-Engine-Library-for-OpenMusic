@@ -1,0 +1,136 @@
+(:om-lib
+
+(:version 0.1beta)
+
+(:doc "CLUSTER-ENGINE") 
+
+(:author "Orjan Sandred (2010) 
+- Plain LISP version - Orjan Sandred, Torsten Anders and Julien Vincenot (2020)
+- OM version - Paulo Raposo (2021)")
+
+(:source-files "sources/package" 
+	       "sources/iter" 
+	       "sources/pw-common-language" 	
+               "sources/from-studio-flat"  
+               "sources/01-domain" 
+               "sources/02-engine" 						 
+               "sources/03-Fwd-rules" 	
+               "sources/04-Backtrack-rules" 	
+               "sources/05-rules-interface"	
+               "sources/05a-rules-interface-1engine" 	
+               "sources/05b-rules-interface-2engines" 	
+               "sources/05c-rules-interface-2engines" 	
+               "sources/05d-rules-interface-2engines" 	
+               "sources/05d-2-rules-interface-2engines" 	
+               "sources/05e-rules-interface-2engines" 	
+               "sources/05f-rules-interface-3engines" 	
+               "sources/05g-rules-interface-any-n-engines" 	
+               "sources/05h-rules-higher-level" 		
+               "sources/05i-rules-stop-search" 
+               "sources/05n-rules-interface-nn-engines" 
+               "sources/05o-new-canon-rule" 
+               "sources/06-heuristic-rules-interface" 
+               "sources/06a-heuristic-rules-interface-1engine" 
+               "sources/06b-heuristic-rules-interface-2engines" 
+               "sources/06c-heuristic-rules-interface-2engines" 
+               "sources/06d-heuristic-rules-interface-2engines" 
+               "sources/06e-heuristic-rules-interface-2engines" 
+               "sources/06f-heuristic-rules-interface-3engines"
+               "sources/06g-heuristic-rules-interface-any-n-engines" 
+               "sources/06h-heuristic-rules-interface-added2020" 
+               "sources/07-backjumping" 
+               "sources/08-decode" 	
+	       "sources/09-utilities" 
+	       "sources/09b-markov-tools" 	
+	       "sources/09c-cluster-energy-profile"
+	       "sources/_000-main-interface"  	
+	       "sources/10-OM-interface"
+	       "sources/12-debug-tools"  	
+	       "sources/13-convert-pmc-rules" 		
+	       "sources/pw_profile_functions"
+	       "sources/_001-gen_domains")
+ (:symbols 
+      (:packages
+            (:package
+		 (:name "ENGINE")
+			 (:functions "ce::Cluster-Engine" "ce::cluster-engine2" "ce::cluster-engine3" "ce::rules-to-cluster"))
+            (:package
+		 (:name "DOMAIN, DEBUG AND MORE")
+			 (:functions
+ 				"ce::metricdomain"
+ 				"ce::Stoprule-time"
+ 				"ce::Stoprule-index"
+ 				"ce::Rpredefine-meter"
+                                "ce::prefs"))
+
+            (:package
+		 (:name "RULES ONE ENGINE")
+			 (:functions
+ 				"ce::Rrhythms-one-voice"
+ 				"ce::Rindex-rhythms-one-voice"
+ 				"ce::Rpitches-one-voice"
+ 				"ce::Rindex-pitches-one-voice"
+                                "ce::Rtime-signatures"
+				"ce::Rindex-time-signatures"
+				"ce::Ronly-m-motifs"
+				"ce::Rrhythms-one-voice-at-timepoints"
+				"ce::HRrhythms-one-voice"
+				"ce::HRindex-rhythms-one-voice"
+				"ce::HRpitches-one-voice"
+				"ce::HRindex-pitches-one-voice"
+				"ce::HRtime-signatures"
+				"ce::HRindex-time-signatures"
+				"ce::Rpmc-one-voice"
+				"ce::setend"))
+            (:package
+		 (:name "RULES ONE VOICE")
+			 (:functions
+ 				"ce::Rrhythm-pitch-one-voice"
+ 				"ce::Rindex-rhythm-pitch-one-voice"
+ 				"ce::Rmetric-hierarchy"						                        "ce::Rnote-meter" 
+				"ce::Rmeter-note"  
+				"ce::Rmel-interval-one-voice" 
+				"ce::HRrhythm-pitch-one-voice" 
+				"ce::HRindex-rhythm-pitch-one-voice" 
+				"ce::HRduration-meter" 
+				"ce::HRmeter-duration"))
+
+            (:package
+		 (:name "RULES TWO VOICES")
+			 (:functions
+				"ce::Rrhythm-rhythm"
+				"ce::Rrhythm-hierarchy"
+ 				"ce::Rcanon"
+				"ce::HRrhythm-rhythm"
+ 				))
+
+            (:package
+		 (:name "RULES TWO OR MORE VOICES")
+			 (:functions
+				"ce::Rpitch-pitch" 
+				"ce::Rchords" 
+				"ce::Rlist-all-events" 
+				"ce::HRpitch-pitch" 
+				"ce::HRlist-all-events"
+ 				))
+
+            (:package
+		 (:name "UTILITIES")
+			 (:functions
+				"ce::apply_and" 
+				"ce::apply_minus" 
+				"ce::midics-to-pcs" 
+				"ce::test-seq-follows-markov_chain?" 
+				"ce::test-seq-follows-energy_profile?"
+ 				))
+
+            (:package
+		 (:name "JBS-CONSTRAINTS-DEMO")
+			 (:functions
+				"ce::allowed-intervals-rule" 
+ 				))
+
+
+      )
+ )
+)
