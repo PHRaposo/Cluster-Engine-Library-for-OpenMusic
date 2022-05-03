@@ -1,0 +1,163 @@
+<html>
+<head><title>HRDURATION-METER - Cluster-Engine Reference Documentation</title>
+<STYLE TYPE="text/css"><!--  
+
+BODY {background-color: #EEEEEE;
+	  font-family: Verdana;
+font-size: 12;
+color : #0000000;
+}
+
+A:link {text-decoration: underline; color : 333366;}
+A:visited {text-decoration: underline; color : 333366;}
+A:active {Verdana; text-decoration: underline; color:333366;}
+A:hover {Verdana; text-decoration: underline; color: 333366;}
+
+H1 {
+ color : #333333;
+ font-size: 18;
+ font-weight: bold
+ text-align: left;
+}
+	
+H2 {
+ color : #333333;
+ font-size: 16;
+ font-weight: bold;
+}
+
+H3 {
+ color : #444444;
+ font-size: 12;
+ font-weight: bold;
+}
+
+P,UL,LI, TD {	
+ font-size: 11;
+ text-indent: 0cm;
+ text-align: justify;
+}
+.right {text-align: right ;}
+.center {text-align: center ;}
+.top {text-align: top ;}
+   --></style>
+</head>
+<body bgcolor=BBBBBB>
+<br>
+<table align=center bgcolor=FFFFFF width=87%><tr>
+<td>
+<h2>HRDURATION-METER</h2>
+<font size=-1>[GENERIC-FUNCTION]</font><br><br>
+</td><td width=130>
+<img src=./omlogo.gif width=100><br>
+<font size=-2 align=right><a href=index.html>Cluster-Engine<br> Function Reference</a></font>
+</td></tr>
+<tr><td colspan=2>
+<font color=882222><b>ARGUMENTS:</b></font><br>
+<table width=100% border=0>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>rule</b></font>
+</td>
+<td>rule</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>voices</b></font>
+</td>
+<td>voice-number</td>
+<td>[default = 0]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>format</b></font>
+</td>
+<td>format</td>
+<td>[default = :dur_offset]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>metric-structure</b></font>
+</td>
+<td>metric-structure</td>
+<td>[default = :beats]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>rest-mode</b></font>
+</td>
+<td>rest-mode</td>
+<td>[default = :incl-rests]</td>
+</tr>
+<tr>
+</table>
+</tr>
+<tr><td colspan=2>
+<br><font color=882222><b>Description:</b></font><p>
+Heuristic rule for the metric position of durations and rests. The rule <br>
+checks all events in one voice.<br>
+<br>
+Heuristic rules sort the candidates locally according to weights. <br>
+The true/false rules will test candidates that receive high weights by<br>
+the heuristic rules before other candidates (and in this way give them<br>
+higher priority). A heuristic rule can never fail a candidate, nor <br>
+can it trigger backtracking of an engine. <br>
+<br>
+&lt;rule&gt; is a function that outputs a numerical weight.  Each input will  <br>
+receive the information on regarding an events offset to its beat or the <br>
+first beat of its measure. If the rule has more than one input it will  <br>
+receive information for consecutive events. The exact information and <br>
+format of an input depends on settings (see below).<br>
+<br>
+&lt;voices&gt; is the number for the voice (starting at 0) that the rule <br>
+affects. A list of numbers indicate that the rule is valid for every<br>
+voice in the list.<br>
+<br>
+&lt;format&gt; sets how the information for an input is formated. <br>
+ - dur_offset: An input will receive a list with the duration of the <br>
+               event and the offset to the following beat (i.e. the duration <br>
+               until the following beat). Offset 0 indicates that the event<br>
+               is synchronized with the beat. Example: '(1/4 -1/8)<br>
+ - offset:     An input will receive the offset to the following beat <br>
+               (i.e. the duration until the following beat). Offset 0 <br>
+               indicates that the event is synchronized with the beat.<br>
+               If the duration of an event is not necessary to know, this<br>
+               setting should be chosen.<br>
+<br>
+&lt;metric-structure&gt; <br>
+ - beats: The offsets will relate to the following beat.<br>
+ - 1st-beat:  The offset will relate to the following 1st beat in the <br>
+              next measure.<br>
+<br>
+&lt;rest-mode&gt;<br>
+ - incl.rests: The rule will be checked for durations and rests (rests are<br>
+              indicated as negative durations). If rests are not included<br>
+              in the domain, this setting should be chosen.<br>
+ - durations: The rule will not be checked for rests (if the rule has<br>
+              more than one input, rests will be skipped).<br>
+<br>
+*******NOT SUPPORTED ***********************************************************<br>
+&lt;gracenotes?&gt;<br>
+ - normal:    The rule will include grace notes as separate events. If<br>
+              grace notes are not included in the domain, this setting <br>
+              should be chosen.<br>
+ - exclude-gracenotes: The rule will not be checkes for grace notes (if <br>
+              the rule has more than one input, grace notes will be <br>
+              skipped).<br>
+ ******************************************************************************<br>
+<br>
+</p><br><br></td></tr>
+<td class=center colspan=2>
+<center><font size=-2>Auto doc generation by OpenMusic 7.0 &copy 2022 IRCAM</font></center>
+</td></tr></table>
+</body></html>

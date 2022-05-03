@@ -1,0 +1,192 @@
+<html>
+<head><title>HRRHYTHM-RHYTHM - Cluster-Engine Reference Documentation</title>
+<STYLE TYPE="text/css"><!--  
+
+BODY {background-color: #EEEEEE;
+	  font-family: Verdana;
+font-size: 12;
+color : #0000000;
+}
+
+A:link {text-decoration: underline; color : 333366;}
+A:visited {text-decoration: underline; color : 333366;}
+A:active {Verdana; text-decoration: underline; color:333366;}
+A:hover {Verdana; text-decoration: underline; color: 333366;}
+
+H1 {
+ color : #333333;
+ font-size: 18;
+ font-weight: bold
+ text-align: left;
+}
+	
+H2 {
+ color : #333333;
+ font-size: 16;
+ font-weight: bold;
+}
+
+H3 {
+ color : #444444;
+ font-size: 12;
+ font-weight: bold;
+}
+
+P,UL,LI, TD {	
+ font-size: 11;
+ text-indent: 0cm;
+ text-align: justify;
+}
+.right {text-align: right ;}
+.center {text-align: center ;}
+.top {text-align: top ;}
+   --></style>
+</head>
+<body bgcolor=BBBBBB>
+<br>
+<table align=center bgcolor=FFFFFF width=87%><tr>
+<td>
+<h2>HRRHYTHM-RHYTHM</h2>
+<font size=-1>[GENERIC-FUNCTION]</font><br><br>
+</td><td width=130>
+<img src=./omlogo.gif width=100><br>
+<font size=-2 align=right><a href=index.html>Cluster-Engine<br> Function Reference</a></font>
+</td></tr>
+<tr><td colspan=2>
+<font color=882222><b>ARGUMENTS:</b></font><br>
+<table width=100% border=0>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>rule</b></font>
+</td>
+<td>rule</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>voice1</b></font>
+</td>
+<td>voice1</td>
+<td>[default = 0]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>voice2</b></font>
+</td>
+<td>voice2</td>
+<td>[default = 1]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>input-mode1</b></font>
+</td>
+<td>input-mode1</td>
+<td>[default = :dl_offs]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>input-mode2</b></font>
+</td>
+<td>input-mode2</td>
+<td>[default = :norm]</td>
+</tr>
+<tr>
+<tr>
+<td width=40>&nbsp;</td>
+<td>
+- <font color=333366><b>input-filter</b></font>
+</td>
+<td>input-filter</td>
+<td>[default = :at-durations-vl]</td>
+</tr>
+<tr>
+</table>
+</tr>
+<tr><td colspan=2>
+<br><font color=882222><b>Description:</b></font><p>
+Heuristic rule for the relation between durations in two voices. <br>
+<br>
+Heuristic rules sort the candidates locally according to weights. <br>
+The true/false rules will test candidates that receive high weights by<br>
+the heuristic rules before other candidates (and in this way give them<br>
+higher priority). A heuristic rule can never fail a candidate, nor <br>
+can it trigger backtracking of an engine. <br>
+<br>
+NOTE that this heuristic rule will have most effect on durations: offsets<br>
+will be very little affected (if any at all).<br>
+<br>
+&lt;rule&gt; is a function that outputs a numerical weight. Each input will <br>
+receive a list with information regarding a timepoint in the score. If the <br>
+rule has more than one input it will receive information for consecutive <br>
+timepoints. If the input-mode2 is set to list, the rule can only have one <br>
+input. The exact information and format of the list depends on the <br>
+selected input mode (see below).<br>
+<br>
+&lt;voice1&gt; and &lt;voice2&gt; are the numbers for the voices (starting at 0) that <br>
+the rule affects. <br>
+<br>
+&lt;input-mode1&gt; determines what format for the variables:<br>
+ - d1_offset: The rule will receive a list with a duration in voice 1 and <br>
+              the offset to the event in voice 2 that exist at the onset <br>
+              for the duration in voice 1. Rests and grace notes in voice 1 <br>
+              are ignored. Grace notes are ignored in voice 2, but rests are<br>
+              included. Format: '(duration offset), example: '(1/2 -1/8).<br>
+ - d1_offset_d2: Identical to d1_offset but also returns the duration (or <br>
+              rest) in voice 2. Format: '(duration1 offset duration2), <br>
+              example: '(1/2 -1/8 1/4).<br>
+<br>
+&lt;input-mode2&gt;<br>
+ - norm: This setting is the normal behaviour of the function. An input receives<br>
+              the information for one time point. More than one input it <br>
+              will receive information for consecutive timepoints.<br>
+ - list: The rule must have exactly one input. The input will receive a <br>
+              list of all time points that are known when the rule is<br>
+              checked. If any of the break-at-rest settings are used, the<br>
+              rule will check each segment at a time.<br>
+<br>
+&lt;input-filter&gt; determines what information the rule will receive:<br>
+ - at-durations-v1: The rule will receive informaton for all durations  <br>
+              (grace notes and rests excluded) in voice 1.<br>
+ - break-at-rest-v1: This will only differ from the above setting for<br>
+              rules with more than one input. The rule will not not<br>
+              check durations that are separated by a rest in voice 1.<br>
+              If the list setting is chosen above, the list will be<br>
+              segmented at rests in voice 1.<br>
+ - break-at-rest-v1-v2: The rule will not check points where voice 1 or<br>
+              voice 2 (or both) have a rest. If the rule has more than <br>
+              one input, it will not check timepoints that are separated <br>
+              by a rest in voice 1 or timepoints that have rests in voice 2.<br>
+              If the list setting is chosen above, the list will be<br>
+              segmented at rests in voice 1 or 2.<br>
+<br>
+<br>
+The latter 2 settings are useful for rules that are only valid within <br>
+a phrase.<br>
+<br>
+<br>
+[Backtracking: By default this rule will trigger backtracking in the other<br>
+               engine than the engine that failed. If this is not possible, <br>
+               it will trigger backtracking in its own engine.]<br>
+<br>
+A word on efficiency:<br>
+The most efficient input mode is the d1_offset (if the input-filter is set<br>
+to at-durations-v1): the system is able to check this type of rule earlier than <br>
+rules with other input modes. This is due to that it can consider the last endpoint<br>
+as a new onset, without knowing the duration for this new event. This setting<br>
+will have more of an impact than other settings. Other input modes will only have<br>
+an effect for durations (not offsets).<br>
+<br>
+</p><br><br></td></tr>
+<td class=center colspan=2>
+<center><font size=-2>Auto doc generation by OpenMusic 7.0 &copy 2022 IRCAM</font></center>
+</td></tr></table>
+</body></html>
