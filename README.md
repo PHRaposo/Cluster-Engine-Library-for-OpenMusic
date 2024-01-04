@@ -16,6 +16,14 @@ Cluster Engine has been successfully tested on PWGL (based on Lispworks), SBCL a
 
 Move the Cluster-Engine folder to the OM/Libraries/ folder (it's important to use this location to see all the tutorials pictures in OM).   
 
+* UPDATE september/2021
+ - The function rpredefine-meter was corrected;
+ - New Function: cluster-engine3 - unlimited number of voices.
+ - Thanks to Teemu Heinonen for catching this bug and for the suggestion for the engine with unlimited voices.
+
+* UPDATE january/2024
+- Added the new function fix-ompatch-rule to avoid lexical closure errors in OM;
+- Added the new file 10b-OM-sharp-interface.lisp only for OM# compatibility.
 
 ** References 
 
