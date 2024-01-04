@@ -21,6 +21,10 @@
                           collect (list (nth n linear-solution) (nth (1+ n) linear-solution)))))						   
  (mapcar #'(lambda (input1)
   (make-voices (first input1) (second input1) (om::last-elem linear-solution) tempo)) rhythm-pitch))) 
+	  
+(defun fix-ompatch-rule (lambda-patch)
+ (let ((exp (om::function-lambda-expression lambda-patch)))
+  (eval `(function ,exp))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; CLUSTER-ENGINE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -194,7 +198,7 @@ equal, the default search order determines which voice to search next.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RULES -> CLUSTER ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+	   
 (om::defmethod! rules-to-cluster (&rest rules?)
 	:initvals '(nil)
     :indoc '("rules") 
@@ -465,7 +469,7 @@ Heuristic switch rules differs slightly form regular heuristic rules (the
 latter don't output true or false, but a weight that might vary depending
 on the candidate).
 "
-(R-rhythms-one-voice rule voices input-mode rule-type weight))
+(R-rhythms-one-voice (fix-ompatch-rule rule) voices input-mode rule-type weight))
 
 (om::defmethod! Rindex-rhythms-one-voice ((rule t) (positions list) (voices t) (input-mode t) &optional (rule-type :true/false) (weight 1))
  :initvals '(nil (0) 0 :index-for-cell :true/false 1)
@@ -514,7 +518,7 @@ context, heuristic rules might have more or less of an effect.
 Heuristic switch rules differs slightly form regular heuristic rules (the 
 latter don't output true or false, but a weight that might vary depending
 on the candidate)."
- (R-index-rhythms-one-voice rule positions voices input-mode rule-type weight))
+ (R-index-rhythms-one-voice (fix-ompatch-rule rule) positions voices input-mode rule-type weight))
 
 (om::defmethod! Rpitches-one-voice ((rule t) (voices t) (input-mode t) &optional (rule-type :true/false) (weight 1))
 :initvals '(nil 0 :pitches :true/false 1)
@@ -568,7 +572,7 @@ Heuristic switch rules differs slightly form regular heuristic rules (the
 latter don't output true or false, but a weight that might vary depending
 on the candidate).
 "
- (R-pitches-one-voice rule voices input-mode rule-type weight))
+ (R-pitches-one-voice (fix-ompatch-rule rule) voices input-mode rule-type weight))
 
 (om::defmethod! Rindex-pitches-one-voice ((rule t) (positions list) (voices t) (input-mode t) &optional (rule-type :true/false) (weight 1))
  :initvals '(nil (0) 0 :index-for-cell :true/false 1)
@@ -616,7 +620,7 @@ context, heuristic rules might have more or less of an effect.
 Heuristic switch rules differs slightly form regular heuristic rules (the 
 latter don't output true or false, but a weight that might vary depending
 on the candidate)."
- (R-index-pitches-one-voice rule positions voices input-mode rule-type weight))
+ (R-index-pitches-one-voice (fix-ompatch-rule rule) positions voices input-mode rule-type weight))
  
 (om::defmethod! Rtime-signatures ((rule t) (input-mode t) &optional (rule-type :true/false) (weigth 1))
 :initvals '(nil :timesigns :true/false 1)
@@ -655,7 +659,7 @@ Heuristic switch rules differs slightly form regular heuristic rules (the
 latter don't output true or false, but a weight that might vary depending
 on the candidate).
 "
- (R-time-signatures rule input-mode rule-type weight))
+ (R-time-signatures (fix-ompatch-rule rule) input-mode rule-type weight))
 
 (om::defmethod! Rindex-time-signatures ((rule t) (indexes list) &optional (rule-type :true/false) (weight 1) )
 :initvals '(nil (0) :true/false 1)
@@ -687,7 +691,7 @@ context, heuristic rules might have more or less of an effect.
 Heuristic switch rules differs slightly form regular heuristic rules (the 
 latter don't output true or false, but a weight that might vary depending
 on the candidate)."
- (R-index-time-signatures rule indexes rule-type weight))
+ (R-index-time-signatures (fix-ompatch-rule rule) indexes rule-type weight))
 
 (om::defmethod! Ronly-m-motifs ((voices t) &optional (rule-type :true/false) (weight 1))
 :initvals '(0 :true/false 1)
@@ -764,7 +768,7 @@ score.
                 Ex. (-1/16 1/4)
 
 This rule always prefer to backtrack the rhythm engine that it belongs to."
- (R-rhythms-one-voice-at-timepoints rule voices timepoints input-mode rule-type weight))
+ (R-rhythms-one-voice-at-timepoints (fix-ompatch-rule rule) voices timepoints input-mode rule-type weight))
 
 (om::defmethod! HRrhythms-one-voice ((rule t) (voices t) (rule-type t))
 :initvals '(nil 0 :durations)
@@ -807,7 +811,7 @@ its inputs:
                 The list will thus become longer and longer during the 
                 search. The rule can only have ONE input in this mode.
 "
- (HR-rhythms-one-voice rule voices rule-type))
+ (HR-rhythms-one-voice (fix-ompatch-rule rule) voices rule-type))
 
 (om::defmethod! HRindex-rhythms-one-voice ((rule t) (positions list) (voices t) (rule-type t))
 :initvals '(nil (0) 0 :index-for-cell)
@@ -848,7 +852,7 @@ receive in its inputs:
                           of the individual duraions in the solution.
                           Rests are included.
 "
- (HR-index-rhythms-one-voice rule positions voices rule-type))
+ (HR-index-rhythms-one-voice (fix-ompatch-rule rule) positions voices rule-type))
 
 (om::defmethod! HRpitches-one-voice ((rule t) (voices t) (input-mode t))
 :initvals '(nil 0 :pitches)
@@ -891,7 +895,7 @@ its inputs:
                 The list will thus become longer and longer during the 
                 search. The rule can only have ONE input in this mode.
 "
- (HR-pitches-one-voice rule voices input-mode))
+ (HR-pitches-one-voice (fix-ompatch-rule rule) voices input-mode))
 
 (om::defmethod! HRindex-pitches-one-voice ((rule t) (positions list) (voices t) (input-mode t))
 :initvals '(nil (0) 0 :index-for-cell)
@@ -930,7 +934,7 @@ its inputs:
                           The positions refer to the position
                           of the individual duraions in the solution.
 "
- (HR-index-pitches-one-voice rule positions voices input-mode))
+ (HR-index-pitches-one-voice (fix-ompatch-rule rule) positions voices input-mode))
 
 
 (om::defmethod! HRtime-signatures ((rule t) (input-mode t))
@@ -959,7 +963,7 @@ its inputs:
                 this mode. Ex. '((4 4) (6 8))
 
 "
- (HR-time-signatures rule input-mode))
+ (HR-time-signatures (fix-ompatch-rule rule) input-mode))
 
 
 (om::defmethod! HRindex-time-signatures ((rule t) (indexes list))
@@ -981,7 +985,7 @@ Indexes are counted from 0. Every position in this list corresponds to
 an input in the rule. See also input-mode below.
 
 "
- (HR-index-time-signatures rule indexes))
+ (HR-index-time-signatures (fix-ompatch-rule rule) indexes))
 
 (om::defmethod! Rpmc-one-voice ((pmcrules0 t) (ruletype0 t) (voice0 integer) 
                                        &optional (pmcrules1 nil) (ruletype1 nil) (voice1 0)
@@ -1139,7 +1143,7 @@ context, heuristic rules might have more or less of an effect.
 Heuristic switch rules differs slightly form regular heuristic rules (the 
 latter don't output true or false, but a weight that might vary depending
 on the candidate)."
- (R-rhythm-pitch-one-voice rule voices input-mode :normal rule-type weight))
+ (R-rhythm-pitch-one-voice (fix-ompatch-rule rule) voices input-mode :normal rule-type weight))
 
 (om::defmethod! Rindex-rhythm-pitch-one-voice ((rule t) (positions list) (voices t) (input-mode t) &optional (rule-type :true/false) (weight 1)) 
  :initvals '(nil (0) 0 :nth-note :true/false 1)
@@ -1190,7 +1194,7 @@ context, heuristic rules might have more or less of an effect.
 Heuristic switch rules differs slightly form regular heuristic rules (the 
 latter don't output true or false, but a weight that might vary depending
 on the candidate)."
- (R-index-rhythm-pitch-one-voice rule positions voices input-mode rule-type weight))
+ (R-index-rhythm-pitch-one-voice (fix-ompatch-rule rule) positions voices input-mode rule-type weight))
 
 (om::defmethod! Rmetric-hierarchy ((voices t) (rule-mode t) &optional (rule-type :true/false) (weight 1)) 
  :initvals '( 0 :durations :true/false 1)
@@ -1318,7 +1322,7 @@ Heuristic switch rules differs slightly form regular heuristic rules (the
 latter don't output true or false, but a weight that might vary depending
 on the candidate).
 "
- (R-note-meter rule voices format metric-structure rest-mode :normal rule-type weight))
+ (R-note-meter (fix-ompatch-rule rule) voices format metric-structure rest-mode :normal rule-type weight))
 
 (om::defmethod! Rmeter-note ((rule t) (voices t) (metric-structure t) (input-mode1 t) (input-mode2 t) &optional (rule-type :true/false) (weight 1))
 :initvals '(nil 0 :beats :offset :norm :true/false 1)
@@ -1400,7 +1404,7 @@ Heuristic switch rules differs slightly form regular heuristic rules (the
 latter don't output true or false, but a weight that might vary depending
 on the candidate).
 "
- (R-meter-note rule voices metric-structure input-mode1 input-mode2 rule-type weight))
+ (R-meter-note (fix-ompatch-rule rule) voices metric-structure input-mode1 input-mode2 rule-type weight))
 
 (om::defmethod! Rmel-interval-one-voice ((voices t) (segments? t) (match-dur t) (durations t) (match-pitch t) (intervals t) &optional (rule-type :true/false) (weight 1))
 :initvals '( 0 :normal := 1/4 := 500 :true/false 1)
@@ -1483,7 +1487,7 @@ heuristic rule:
                        rule.
 *****************************************************************************************
 "
- (HR-rhythm-pitch-one-voice rule voices input-mode :normal))
+ (HR-rhythm-pitch-one-voice (fix-ompatch-rule rule) voices input-mode :normal))
 
 (om::defmethod! HRindex-rhythm-pitch-one-voice ((rule t) (positions list) (voices t) (input-mode t)) 
  :initvals '(nil (0) 0 :nth-note) 
@@ -1518,7 +1522,7 @@ its inputs:
                  skipping) rests.
  - include-rests: The rule will receive rhythm-pitch pairs including rests.
 "
- (HR-index-rhythm-pitch-one-voice rule positions voices input-mode))
+ (HR-index-rhythm-pitch-one-voice (fix-ompatch-rule rule) positions voices input-mode))
 
 (om::defmethod! HRduration-meter ((rule t) (voices t) (format t) (metric-structure t) (rest-mode t))
 :initvals '(nil 0 :dur_offset :beats :incl-rests)
@@ -1579,7 +1583,7 @@ voice in the list.
               skipped).
  ******************************************************************************
 "
- (HR-duration-meter rule voices metric-structure rest-mode :normal))
+ (HR-duration-meter (fix-ompatch-rule rule) voices metric-structure rest-mode :normal))
 
 (om::defmethod! HRmeter-duration ((rule t) (voices t) (format t) (metric-structure t))
 :initvals '(nil 0 :offset :beats)
@@ -1629,7 +1633,7 @@ voice in the list.
  - beats: The rule will be applied at every beat.
  - 1st-beat:  The rule will be applied at the first beat of every measure.
 "
- (HR-meter-duration rule voices format metric-structure))
+ (HR-meter-duration (fix-ompatch-rule rule) voices format metric-structure))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RULES TWO VOICES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1724,7 +1728,7 @@ context, heuristic rules might have more or less of an effect.
 Heuristic switch rules differs slightly form regular heuristic rules (the 
 latter don't output true or false, but a weight that might vary depending
 on the candidate)."
- (R-rhythm-rhythm rule voice1 voice2 input-mode1 input-mode2 input-filter rule-type weight))
+ (R-rhythm-rhythm (fix-ompatch-rule rule) voice1 voice2 input-mode1 input-mode2 input-filter rule-type weight))
 
 (om::defmethod! HRrhythm-rhythm ((rule t) (voice1 integer) (voice2 integer) (input-mode1 t) (input-mode2 t) (input-filter t))
 :initvals '(nil 0 1 :dl_offs :norm :at-durations-vl)
@@ -1805,7 +1809,7 @@ as a new onset, without knowing the duration for this new event. This setting
 will have more of an impact than other settings. Other input modes will only have
 an effect for durations (not offsets).
 "
- (HR-rhythm-rhythm rule voice1 voice2 input-mode1 inp0ut-mode2 input-filter))
+ (HR-rhythm-rhythm (fix-ompatch-rule rule) voice1 voice2 input-mode1 inp0ut-mode2 input-filter))
 
 (om::defmethod! Rcanon ((voices list ) (parameter t) (offset number) (interval integer))
 :initvals '((0 1) :rhythm 1/2 700)
@@ -1974,7 +1978,7 @@ Heuristic switch rules differs slightly form regular heuristic rules (the
 latter don't output true or false, but a weight that might vary depending
 on the candidate).
 "
- (R-pitch-pitch rule list-all-voices timepoints input-mode :exclude-gracenotes format rule-type weight))
+ (R-pitch-pitch (fix-ompatch-rule rule) list-all-voices timepoints input-mode :exclude-gracenotes format rule-type weight))
 
 (om::defmethod! Rchords ((list-voices list) (model list) (timepoints list) (input-mode t) &optional (rule-type :true/false) (weight 1))
 :initvals '( (0 1) ((400 700) (300 700)) (0) :all :true/false 1)
@@ -2105,7 +2109,7 @@ Heuristic switch rules differs slightly form regular heuristic rules (the
 latter don't output true or false, but a weight that might vary depending
 on the candidate).
 "
- (R-list-all-events rule voices parameter rule-type weight))
+ (R-list-all-events (fix-ompatch-rule rule) voices parameter rule-type weight))
 
 (om::defmethod! HRlist-all-events ((rule t) (voices list) (parameter t))
 :initvals '( nil (0 1) :pitches)
@@ -2128,7 +2132,7 @@ an individual heuristic rule.
 
 <parameter> determines if the rule will access pitches or durations:
 "
- (HR-list-all-events rule voices parameter))
+ (HR-list-all-events (fix-ompatch-rule rule) voices parameter))
 
 (om::defmethod! HRpitch-pitch ((rule t) (list-voices list) (timepoints list) (input-mode t))
 :initvals '( nil (0 1) (0) :all)
@@ -2176,7 +2180,7 @@ backtracking.
 list-of-voices can include any number of voices. All voices must have a pitch 
 and rhythm domain.
 "
- (HR-pitch-pitch rule list-voices timepoints input-mode :exclude-gracenotes))
+ (HR-pitch-pitch (fix-ompatch-rule rule) list-voices timepoints input-mode :exclude-gracenotes))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; UTILITIES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
