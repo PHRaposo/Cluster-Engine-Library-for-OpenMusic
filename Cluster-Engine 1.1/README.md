@@ -1,7 +1,7 @@
 # Cluster Engine
 
 CLUSTER ENGINE LIBRARY FOR OPENMUSIC
-PWGL VERSION BY ÖRJAN SANDRED (2010)
+PWGL VERSION BY ‚Ä¶RJAN SANDRED (2010)
 PLAIN LISP VERSION - ORJAN SANDRED, TORSTEN ANDERS AND JULIEN VINCENOT (2020)
 OM VERSION - PAULO RAPOSO (2021)
 
@@ -26,10 +26,14 @@ Move the Cluster-Engine folder to the OM/Libraries/ folder (it's important to us
  - The function rpredefine-meter was corrected;
  - New Function: cluster-engine3 - unlimited number of voices.
  - Thanks to Teemu Heinonen for catching this bug and for the suggestion for the engine with unlimited voices.
+
+* UPDATE january/2024
+  - Added the new function fix-ompatch-rule to avoid lexical closure errors in OM;
+  - Added the new file 10b-OM-sharp-interface.lisp only for OM# compatibility.
   
 ** References 
 
-Sandred, Ö. (2010) PWMC, a Constraint-Solving System for Generating Music Scores. /Computer Music Journal/. 34(2), 8–24.
+Sandred, ‚Ä¶. (2010) PWMC, a Constraint-Solving System for Generating Music Scores. /Computer Music Journal/. 34(2), 8√ê24.
 
 Vincenot, J. (2017) LISP in Max: Exploratory Computer-Aided Composition in Real-Time. /ICMC 2017/. 
 
