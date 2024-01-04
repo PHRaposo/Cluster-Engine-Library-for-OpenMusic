@@ -44,7 +44,7 @@
 	       "sources/09b-markov-tools" 	
 	       "sources/09c-cluster-energy-profile"
 	       "sources/_000-main-interface"  	
-	       "sources/10-OM-interface"
+	       "sources/10b-OM-interface"
 	       "sources/12-debug-tools"  	
 	       "sources/13-convert-pmc-rules" 		
 	       "sources/pw_profile_functions"
