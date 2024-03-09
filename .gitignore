@@ -22,3 +22,4 @@
 
 *.lisp#
 *.zip
+.DS_Store
