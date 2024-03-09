@@ -1,0 +1,23 @@
+
+*.lisp~
+*.*~
+*.xfasl
+*.64xfasl
+*.ofasl
+*.*ufasl
+#*#
+*.tex~
+*.out
+*.aux
+*.log
+*.blg
+*.bbl
+
+.DS_Store
+
+# don't track auto-generated html's:
+/**/reference/
+/**/reference-pages/
+
+*.lisp#
+*.zip
