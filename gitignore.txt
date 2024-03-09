@@ -12,6 +12,7 @@
 *.log
 *.blg
 *.bbl
+*.html
 
 .DS_Store
 
