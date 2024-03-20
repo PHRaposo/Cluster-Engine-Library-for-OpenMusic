@@ -104,7 +104,8 @@
  											 ) Nil)
 										 
                ("RULES TWO OR MORE VOICES" Nil Nil (ce::Rpitch-pitch 
-												    ce::Rchords 
+												    ce::Rchords
+													ce::Rchords-bass-positions 
 												    ce::Rlist-all-events 
 												    ce::HRpitch-pitch 
 												    ce::HRlist-all-events 

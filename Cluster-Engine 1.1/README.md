@@ -16,7 +16,7 @@ For others versions that runs in PWGL, but also on plain Common Lisp in order to
 https://github.com/tanders/cluster-engine
 
 
-Cluster Engine has been successfully tested on PWGL (based on Lispworks), SBCL and Opusmodus ([[http://ccl.clozure.com][Clozure CL]]).
+Cluster Engine has been successfully tested on Openmusic, PWGL (based on Lispworks), SBCL and Opusmodus ([[http://ccl.clozure.com][Clozure CL]]).
 
 * Installation
 
@@ -30,6 +30,10 @@ Move the Cluster-Engine folder to the OM/Libraries/ folder (it's important to us
 * UPDATE january/2024
   - Added the new function fix-ompatch-rule to avoid lexical closure errors in OM;
   - Added the new file 10b-OM-sharp-interface.lisp only for OM# compatibility.
+  
+  *CHANGES for next update
+  - Corrected lexical closures errors for rules inside patches;
+  - Included Rchords-bass-positions rules. 
   
 ** References 
 

@@ -2305,7 +2305,7 @@ fn-beat is either 'get-all-beats or 'get-1st-down-beats
                  collect (setf chord (next-chord-position chord)))))
  (mapcar #'(lambda (input) (nth input (om::x-append (list (om::last-elem all-chords)) (butlast all-chords)))) bass)))
 
-(defun all-chords-positions-bass (chords bass-positions) ;;;
+(defun all-chords-positions-bass (chords bass-positions)
   "This differs from all-chords-positions in the way it put the model chord first"
   (declare (type list chords))
 

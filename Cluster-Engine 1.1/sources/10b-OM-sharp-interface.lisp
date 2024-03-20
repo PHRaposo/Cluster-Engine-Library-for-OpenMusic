@@ -2019,7 +2019,6 @@ Pitches may exist in any octave.
 "
  (R-chords list-voices model timepoints input-mode :exclude-gracenotes :true/false 1))
 
-#|
 (om::defmethod! Rchords-bass-positions ((list-voices list) (model list) (bass-positions list) (timepoints list) (input-mode t) &optional (rule-type :true/false) (weight 1))
 :initvals '( (0 1) ((400 700) (300 700)) (0 2) (0) :all :true/false 1)
 :indoc '("list-voices" "model-list" "bass-positions-numbers" "timepoints-list" "input-mode" "rule-type" "weight-number") 
@@ -2062,8 +2061,6 @@ Example: model: (400 700) = major chord.
 [Backtracking behaves the same as fro the R-pitch-pitch rule.]
 "
  (R-chords-bass-positions list-voices model bass-positions timepoints input-mode :exclude-gracenotes :true/false 1))
-|#
-
 
 (om::defmethod! Rlist-all-events ((rule t) (voices list) (parameter t) &optional (rule-type :true/false) (weight 1))
 :initvals '( nil (0 1) :pitches :true/false 1)
