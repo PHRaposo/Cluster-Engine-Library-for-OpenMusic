@@ -5106,8 +5106,6 @@ Pitches may exist in any octave.
                                  )))
                          )
                    ))
-#|
-;;; NEW-VERSION-FOR-OPENMUSIC
 
 (defun R-chords-bass-positions (list-voices ;;;; '(0 1)
                  model;;;; '((4 7)(3 7))
@@ -5327,10 +5325,7 @@ Pitches may exist in any octave.
                                  )))
                          )
                    ))
-
-
-
-|#
+				   
 ;;;;;;;;;HIGER LEVEL RULES
 
 (defun R-mel-interval-one-voice (voices ;;;; 0
