@@ -31,8 +31,6 @@ Sandred, Ö. (2010) PWMC, a Constraint-Solving System for Generating Music Score
 
 Vincenot, J. (2017) LISP in Max: Exploratory Computer-Aided Composition in Real-Time. /ICMC 2017/. 
 
-# Click the link below to download the repository:
-
 # [Download](https://github.com/PHRaposo/Cluster-Engine-Library-for-OpenMusic/archive/refs/heads/main.zip)
 
 
