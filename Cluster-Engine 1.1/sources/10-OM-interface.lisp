@@ -622,12 +622,12 @@ latter don't output true or false, but a weight that might vary depending
 on the candidate)."
  (R-index-pitches-one-voice (fix-ompatch-rule rule) positions voices input-mode rule-type weight))
  
-(om::defmethod! Rtime-signatures ((rule t) (input-mode t) &optional (rule-type :true/false) (weigth 1))
+(om::defmethod! Rtime-signatures ((rule t) (input-mode t) &optional (rule-type :true/false) (weight 1))
 :initvals '(nil :timesigns :true/false 1)
 :indoc '( "rule" "input-mode" "rule-type" "weight-number" ) 
 :icon 01
 :menuins '( (1 (("timesigns" :timesigns) ("all-timesigns" :all-timesigns) ) )
-                  (3 (("true/false" :true/false) ("heur-switch" :heur-switch)) ) ) 
+            (2 (("true/false" :true/false) ("heur-switch" :heur-switch)) ) ) 
 :doc  "<rule> is a logic statement in he form of a function. The output of the 
 function has to be either true or false. If there are more than one 
 input to the function, they will receive consecutive time signatures.
